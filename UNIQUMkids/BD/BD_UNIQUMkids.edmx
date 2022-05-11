@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище UNIQUMkidsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Child">
+          <Key>
+            <PropertyRef Name="id_Child" />
+          </Key>
+          <Property Name="id_Child" Type="int" Nullable="false" />
+          <Property Name="Name" Type="int" />
+          <Property Name="Surname" Type="nchar" MaxLength="50" />
+          <Property Name="Year" Type="int" />
+          <Property Name="id_Gender" Type="int" />
+          <Property Name="id_Parent" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id_Gender" />
+          </Key>
+          <Property Name="id_Gender" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="id_Lesson" />
+          </Key>
+          <Property Name="id_Lesson" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" />
+          <Property Name="MinYear" Type="int" />
+          <Property Name="MaxYear" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Description" Type="nchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="LessonChild">
+          <Key>
+            <PropertyRef Name="id_LessonChild" />
+          </Key>
+          <Property Name="id_LessonChild" Type="int" Nullable="false" />
+          <Property Name="id_Lesson" Type="int" />
+          <Property Name="id_Child" Type="int" />
+          <Property Name="id_Raspisanie" Type="int" />
+          <Property Name="id_Teacher" Type="int" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="id_Parent" />
+          </Key>
+          <Property Name="id_Parent" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="Login" Type="nchar" MaxLength="20" />
+          <Property Name="Password" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Raspisanie">
+          <Key>
+            <PropertyRef Name="id_Raspisanie" />
+          </Key>
+          <Property Name="id_Raspisanie" Type="int" Nullable="false" />
+          <Property Name="Days" Type="nchar" MaxLength="200" />
+          <Property Name="Time" Type="nchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id_Teacher" />
+          </Key>
+          <Property Name="id_Teacher" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="30" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="Years" Type="int" />
+          <Property Name="Login" Type="nchar" MaxLength="20" />
+          <Property Name="Password" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Child_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Child" Type="Self.Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id_Gender" />
+            </Principal>
+            <Dependent Role="Child">
+              <PropertyRef Name="id_Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Child_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+          <End Role="Child" Type="Self.Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="id_Parent" />
+            </Principal>
+            <Dependent Role="Child">
+              <PropertyRef Name="id_Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="id_Child" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="id_Lesson" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Lesson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Raspisanie">
+          <End Role="Raspisanie" Type="Self.Raspisanie" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raspisanie">
+              <PropertyRef Name="id_Raspisanie" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Raspisanie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="id_Teacher" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UNIQUMkidsModelContainer">
+          <EntitySet Name="Child" EntityType="Self.Child" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LessonChild" EntityType="Self.LessonChild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Raspisanie" EntityType="Self.Raspisanie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Child_Gender" Association="Self.FK_Child_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Child" EntitySet="Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Child_Parent" Association="Self.FK_Child_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Child" EntitySet="Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Child" Association="Self.FK_LessonChild_Child">
+            <End Role="Child" EntitySet="Child" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Lesson" Association="Self.FK_LessonChild_Lesson">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Raspisanie" Association="Self.FK_LessonChild_Raspisanie">
+            <End Role="Raspisanie" EntitySet="Raspisanie" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Teacher" Association="Self.FK_LessonChild_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UNIQUMkidsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Child">
+          <Key>
+            <PropertyRef Name="id_Child" />
+          </Key>
+          <Property Name="id_Child" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="Int32" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="id_Gender" Type="Int32" />
+          <Property Name="id_Parent" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_Child_Gender" FromRole="Child" ToRole="Gender" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Child_Parent" FromRole="Child" ToRole="Parent" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Child" FromRole="Child" ToRole="LessonChild" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id_Gender" />
+          </Key>
+          <Property Name="id_Gender" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_Child_Gender" FromRole="Gender" ToRole="Child" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="id_Lesson" />
+          </Key>
+          <Property Name="id_Lesson" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MinYear" Type="Int32" />
+          <Property Name="MaxYear" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Lesson" FromRole="Lesson" ToRole="LessonChild" />
+        </EntityType>
+        <EntityType Name="LessonChild">
+          <Key>
+            <PropertyRef Name="id_LessonChild" />
+          </Key>
+          <Property Name="id_LessonChild" Type="Int32" Nullable="false" />
+          <Property Name="id_Lesson" Type="Int32" />
+          <Property Name="id_Child" Type="Int32" />
+          <Property Name="id_Raspisanie" Type="Int32" />
+          <Property Name="id_Teacher" Type="Int32" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_LessonChild_Child" FromRole="LessonChild" ToRole="Child" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonChild_Lesson" FromRole="LessonChild" ToRole="Lesson" />
+          <NavigationProperty Name="Raspisanie" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="LessonChild" ToRole="Raspisanie" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_LessonChild_Teacher" FromRole="LessonChild" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="id_Parent" />
+          </Key>
+          <Property Name="id_Parent" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_Child_Parent" FromRole="Parent" ToRole="Child" />
+        </EntityType>
+        <EntityType Name="Raspisanie">
+          <Key>
+            <PropertyRef Name="id_Raspisanie" />
+          </Key>
+          <Property Name="id_Raspisanie" Type="Int32" Nullable="false" />
+          <Property Name="Days" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="Raspisanie" ToRole="LessonChild" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id_Teacher" />
+          </Key>
+          <Property Name="id_Teacher" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Years" Type="Int32" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Teacher" FromRole="Teacher" ToRole="LessonChild" />
+        </EntityType>
+        <Association Name="FK_Child_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Child" Type="Self.Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id_Gender" />
+            </Principal>
+            <Dependent Role="Child">
+              <PropertyRef Name="id_Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Child_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+          <End Role="Child" Type="Self.Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="id_Parent" />
+            </Principal>
+            <Dependent Role="Child">
+              <PropertyRef Name="id_Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="id_Child" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="id_Lesson" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Lesson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Raspisanie">
+          <End Role="Raspisanie" Type="Self.Raspisanie" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raspisanie">
+              <PropertyRef Name="id_Raspisanie" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Raspisanie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonChild_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="LessonChild" Type="Self.LessonChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="id_Teacher" />
+            </Principal>
+            <Dependent Role="LessonChild">
+              <PropertyRef Name="id_Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UNIQUMkidsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Child" EntityType="Self.Child" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" />
+          <EntitySet Name="LessonChild" EntityType="Self.LessonChild" />
+          <EntitySet Name="Parent" EntityType="Self.Parent" />
+          <EntitySet Name="Raspisanie" EntityType="Self.Raspisanie" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <AssociationSet Name="FK_Child_Gender" Association="Self.FK_Child_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Child" EntitySet="Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Child_Parent" Association="Self.FK_Child_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Child" EntitySet="Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Child" Association="Self.FK_LessonChild_Child">
+            <End Role="Child" EntitySet="Child" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Lesson" Association="Self.FK_LessonChild_Lesson">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Raspisanie" Association="Self.FK_LessonChild_Raspisanie">
+            <End Role="Raspisanie" EntitySet="Raspisanie" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonChild_Teacher" Association="Self.FK_LessonChild_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="LessonChild" EntitySet="LessonChild" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UNIQUMkidsModelContainer" CdmEntityContainer="UNIQUMkidsEntities">
+          <EntitySetMapping Name="Child">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Child">
+              <MappingFragment StoreEntitySet="Child">
+                <ScalarProperty Name="id_Child" ColumnName="id_Child" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="id_Gender" ColumnName="id_Gender" />
+                <ScalarProperty Name="id_Parent" ColumnName="id_Parent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="id_Gender" ColumnName="id_Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lesson">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Lesson">
+              <MappingFragment StoreEntitySet="Lesson">
+                <ScalarProperty Name="id_Lesson" ColumnName="id_Lesson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MinYear" ColumnName="MinYear" />
+                <ScalarProperty Name="MaxYear" ColumnName="MaxYear" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LessonChild">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.LessonChild">
+              <MappingFragment StoreEntitySet="LessonChild">
+                <ScalarProperty Name="id_LessonChild" ColumnName="id_LessonChild" />
+                <ScalarProperty Name="id_Lesson" ColumnName="id_Lesson" />
+                <ScalarProperty Name="id_Child" ColumnName="id_Child" />
+                <ScalarProperty Name="id_Raspisanie" ColumnName="id_Raspisanie" />
+                <ScalarProperty Name="id_Teacher" ColumnName="id_Teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parent">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Parent">
+              <MappingFragment StoreEntitySet="Parent">
+                <ScalarProperty Name="id_Parent" ColumnName="id_Parent" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Raspisanie">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Raspisanie">
+              <MappingFragment StoreEntitySet="Raspisanie">
+                <ScalarProperty Name="id_Raspisanie" ColumnName="id_Raspisanie" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="id_Teacher" ColumnName="id_Teacher" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Years" ColumnName="Years" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
