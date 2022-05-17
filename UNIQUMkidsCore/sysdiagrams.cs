@@ -7,25 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UNIQUMkids.BD
+namespace UNIQUMkidsCore
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Raspisanie
+    public partial class sysdiagrams
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Raspisanie()
-        {
-            this.LessonChild = new HashSet<LessonChild>();
-        }
-    
-        public int id_Raspisanie { get; set; }
-        public string Days { get; set; }
-        public string Time { get; set; }
-        public bool IsDeleted { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonChild> LessonChild { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

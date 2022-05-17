@@ -4,21 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UNIQUMkids.BD
+namespace UNIQUMkidsCore
 {
     public  class AddToBD
     {
-        
-        public static string Diyar()
-        {
-            return "S dnem rojdenia";
-        }
-        public void AddChild(Child child)
-        {
-            bd_connection.connection.Child.Add(child);
-            bd_connection.connection.SaveChanges();
-        }
-
         public void AddLessonChild(LessonChild lessonChild)
         {
             bd_connection.connection.LessonChild.Add(lessonChild);
@@ -28,6 +17,12 @@ namespace UNIQUMkids.BD
         public void AddParent(Parent parent)
         {
             bd_connection.connection.Parent.Add(parent);
+            bd_connection.connection.SaveChanges();
+        }
+
+        public void AddParent(Child child)
+        {
+            bd_connection.connection.Child.Add(child);
             bd_connection.connection.SaveChanges();
         }
 

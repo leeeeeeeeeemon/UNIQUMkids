@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UNIQUMkids.BD
+namespace UNIQUMkidsCore
 {
     using System;
     using System.Collections.Generic;

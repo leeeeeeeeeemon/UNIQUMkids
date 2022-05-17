@@ -19,6 +19,7 @@ namespace UNIQUMkids.BD
         public Nullable<int> id_Child { get; set; }
         public Nullable<int> id_Raspisanie { get; set; }
         public Nullable<int> id_Teacher { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Child Child { get; set; }
         public virtual Lesson Lesson { get; set; }

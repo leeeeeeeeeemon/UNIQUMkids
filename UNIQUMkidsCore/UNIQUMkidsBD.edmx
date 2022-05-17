@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id_Child" />
           </Key>
-          <Property Name="id_Child" Type="int" Nullable="false" />
+          <Property Name="id_Child" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="int" />
           <Property Name="Surname" Type="nchar" MaxLength="50" />
           <Property Name="Year" Type="int" />
@@ -21,14 +21,14 @@
           <Key>
             <PropertyRef Name="id_Gender" />
           </Key>
-          <Property Name="id_Gender" Type="int" Nullable="false" />
+          <Property Name="id_Gender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
             <PropertyRef Name="id_Lesson" />
           </Key>
-          <Property Name="id_Lesson" Type="int" Nullable="false" />
+          <Property Name="id_Lesson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="20" />
           <Property Name="MinYear" Type="int" />
           <Property Name="MaxYear" Type="int" />
@@ -40,7 +40,7 @@
           <Key>
             <PropertyRef Name="id_LessonChild" />
           </Key>
-          <Property Name="id_LessonChild" Type="int" Nullable="false" />
+          <Property Name="id_LessonChild" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_Lesson" Type="int" />
           <Property Name="id_Child" Type="int" />
           <Property Name="id_Raspisanie" Type="int" />
@@ -51,18 +51,20 @@
           <Key>
             <PropertyRef Name="id_Parent" />
           </Key>
-          <Property Name="id_Parent" Type="int" Nullable="false" />
+          <Property Name="id_Parent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Surname" Type="nchar" MaxLength="50" />
           <Property Name="Name" Type="nchar" MaxLength="30" />
           <Property Name="Login" Type="nchar" MaxLength="20" />
           <Property Name="Password" Type="nchar" MaxLength="20" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_Role" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Raspisanie">
           <Key>
             <PropertyRef Name="id_Raspisanie" />
           </Key>
-          <Property Name="id_Raspisanie" Type="int" Nullable="false" />
+          <Property Name="id_Raspisanie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Days" Type="nchar" MaxLength="200" />
           <Property Name="Time" Type="nchar" MaxLength="200" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
@@ -71,7 +73,7 @@
           <Key>
             <PropertyRef Name="id_Role" />
           </Key>
-          <Property Name="id_Role" Type="int" Nullable="false" />
+          <Property Name="id_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -88,12 +90,13 @@
           <Key>
             <PropertyRef Name="id_Teacher" />
           </Key>
-          <Property Name="id_Teacher" Type="int" Nullable="false" />
+          <Property Name="id_Teacher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Surname" Type="nchar" MaxLength="30" />
           <Property Name="Name" Type="nchar" MaxLength="30" />
           <Property Name="Years" Type="int" />
           <Property Name="Login" Type="nchar" MaxLength="20" />
           <Property Name="Password" Type="nchar" MaxLength="20" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Child_Gender">
@@ -165,6 +168,18 @@
             </Principal>
             <Dependent Role="LessonChild">
               <PropertyRef Name="id_Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parent_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_Role" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="id_Role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,6 +217,10 @@
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="LessonChild" EntitySet="LessonChild" />
           </AssociationSet>
+          <AssociationSet Name="FK_Parent_Role" Association="Self.FK_Parent_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Parent" EntitySet="Parent" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -217,10 +236,10 @@
           <Property Name="Year" Type="Int32" />
           <Property Name="id_Gender" Type="Int32" />
           <Property Name="id_Parent" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Child_Gender" FromRole="Child" ToRole="Gender" />
           <NavigationProperty Name="Parent" Relationship="Self.FK_Child_Parent" FromRole="Child" ToRole="Parent" />
           <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Child" FromRole="Child" ToRole="LessonChild" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -240,8 +259,8 @@
           <Property Name="MaxYear" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Lesson" FromRole="Lesson" ToRole="LessonChild" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Lesson" FromRole="Lesson" ToRole="LessonChild" />
         </EntityType>
         <EntityType Name="LessonChild">
           <Key>
@@ -252,11 +271,11 @@
           <Property Name="id_Child" Type="Int32" />
           <Property Name="id_Raspisanie" Type="Int32" />
           <Property Name="id_Teacher" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Child" Relationship="Self.FK_LessonChild_Child" FromRole="LessonChild" ToRole="Child" />
           <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonChild_Lesson" FromRole="LessonChild" ToRole="Lesson" />
           <NavigationProperty Name="Raspisanie" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="LessonChild" ToRole="Raspisanie" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_LessonChild_Teacher" FromRole="LessonChild" ToRole="Teacher" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -267,8 +286,11 @@
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Child" Relationship="Self.FK_Child_Parent" FromRole="Parent" ToRole="Child" />
+          <Property Name="id_Role" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_Child_Parent" FromRole="Parent" ToRole="Child" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Parent_Role" FromRole="Parent" ToRole="Role" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Raspisanie">
           <Key>
@@ -277,8 +299,16 @@
           <Property Name="id_Raspisanie" Type="Int32" Nullable="false" />
           <Property Name="Days" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
           <Property Name="Time" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="Raspisanie" ToRole="LessonChild" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="Raspisanie" ToRole="LessonChild" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id_Role" />
+          </Key>
+          <Property Name="id_Role" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Parent_Role" FromRole="Role" ToRole="Parent" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -300,8 +330,9 @@
           <Property Name="Years" Type="Int32" />
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Teacher" FromRole="Teacher" ToRole="LessonChild" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Teacher" FromRole="Teacher" ToRole="LessonChild" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Child_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
@@ -375,6 +406,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Parent_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_Role" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="UNIQUMkidsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Child" EntityType="Self.Child" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
@@ -382,6 +425,7 @@
           <EntitySet Name="LessonChild" EntityType="Self.LessonChild" />
           <EntitySet Name="Parent" EntityType="Self.Parent" />
           <EntitySet Name="Raspisanie" EntityType="Self.Raspisanie" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" />
           <AssociationSet Name="FK_Child_Gender" Association="Self.FK_Child_Gender">
@@ -408,15 +452,11 @@
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="LessonChild" EntitySet="LessonChild" />
           </AssociationSet>
-          <EntitySet Name="Role" EntityType="UNIQUMkidsModel.Role" />
+          <AssociationSet Name="FK_Parent_Role" Association="Self.FK_Parent_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Parent" EntitySet="Parent" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="id_Role" />
-          </Key>
-          <Property Name="id_Role" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -426,13 +466,13 @@
           <EntitySetMapping Name="Child">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.Child">
               <MappingFragment StoreEntitySet="Child">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id_Child" ColumnName="id_Child" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="id_Gender" ColumnName="id_Gender" />
                 <ScalarProperty Name="id_Parent" ColumnName="id_Parent" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -447,47 +487,57 @@
           <EntitySetMapping Name="Lesson">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.Lesson">
               <MappingFragment StoreEntitySet="Lesson">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id_Lesson" ColumnName="id_Lesson" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MinYear" ColumnName="MinYear" />
                 <ScalarProperty Name="MaxYear" ColumnName="MaxYear" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LessonChild">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.LessonChild">
               <MappingFragment StoreEntitySet="LessonChild">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id_LessonChild" ColumnName="id_LessonChild" />
                 <ScalarProperty Name="id_Lesson" ColumnName="id_Lesson" />
                 <ScalarProperty Name="id_Child" ColumnName="id_Child" />
                 <ScalarProperty Name="id_Raspisanie" ColumnName="id_Raspisanie" />
                 <ScalarProperty Name="id_Teacher" ColumnName="id_Teacher" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Parent">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.Parent">
               <MappingFragment StoreEntitySet="Parent">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="id_Parent" ColumnName="id_Parent" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="id_Role" ColumnName="id_Role" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Raspisanie">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.Raspisanie">
               <MappingFragment StoreEntitySet="Raspisanie">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id_Raspisanie" ColumnName="id_Raspisanie" />
                 <ScalarProperty Name="Days" ColumnName="Days" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="UNIQUMkidsModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id_Role" ColumnName="id_Role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -505,21 +555,14 @@
           <EntitySetMapping Name="Teacher">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="id_Teacher" ColumnName="id_Teacher" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Years" ColumnName="Years" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="UNIQUMkidsModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="id_Role" ColumnName="id_Role" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

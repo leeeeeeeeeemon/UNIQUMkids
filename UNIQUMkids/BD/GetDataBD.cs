@@ -9,14 +9,14 @@ namespace UNIQUMkids.BD
 {
     public class GetDataBD
     {
-        public ObservableCollection<Child> GetChild()
+        public static ObservableCollection<Child> GetChild()
         {
             return new ObservableCollection<Child>(bd_connection.connection.Child.ToList());
         }
 
-        public ObservableCollection<Parent> GetParent()
+        public static List<Parent> GetParent()
         {
-            return new ObservableCollection<Parent>(bd_connection.connection.Parent.ToList());
+            return new List<Parent>(bd_connection.connection.Parent.ToList());
         }
 
         public ObservableCollection<Gender> GetGender()

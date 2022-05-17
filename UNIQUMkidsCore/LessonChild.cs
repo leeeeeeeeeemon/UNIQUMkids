@@ -7,25 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UNIQUMkids.BD
+namespace UNIQUMkidsCore
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Raspisanie
+    public partial class LessonChild
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Raspisanie()
-        {
-            this.LessonChild = new HashSet<LessonChild>();
-        }
-    
-        public int id_Raspisanie { get; set; }
-        public string Days { get; set; }
-        public string Time { get; set; }
+        public int id_LessonChild { get; set; }
+        public Nullable<int> id_Lesson { get; set; }
+        public Nullable<int> id_Child { get; set; }
+        public Nullable<int> id_Raspisanie { get; set; }
+        public Nullable<int> id_Teacher { get; set; }
         public bool IsDeleted { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonChild> LessonChild { get; set; }
+        public virtual Child Child { get; set; }
+        public virtual Lesson Lesson { get; set; }
+        public virtual Raspisanie Raspisanie { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

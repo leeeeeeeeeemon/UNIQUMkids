@@ -26,6 +26,7 @@ namespace UNIQUMkids.BD
         public Nullable<int> Year { get; set; }
         public Nullable<int> id_Gender { get; set; }
         public Nullable<int> id_Parent { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Gender Gender { get; set; }
         public virtual Parent Parent { get; set; }

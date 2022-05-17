@@ -26,6 +26,7 @@ namespace UNIQUMkids.BD
         public Nullable<int> Years { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonChild> LessonChild { get; set; }
