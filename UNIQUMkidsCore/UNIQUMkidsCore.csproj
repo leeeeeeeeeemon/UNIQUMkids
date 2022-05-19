@@ -66,6 +66,7 @@
     <Compile Include="LessonChild.cs">
       <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="MainFunc.cs" />
     <Compile Include="Parent.cs">
       <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
     </Compile>
