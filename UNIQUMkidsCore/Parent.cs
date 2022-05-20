@@ -25,9 +25,9 @@ namespace UNIQUMkidsCore
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Number { get; set; }
         public Nullable<int> id_Role { get; set; }
         public bool IsDeleted { get; set; }
-        public string Number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Child> Child { get; set; }

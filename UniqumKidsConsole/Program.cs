@@ -4,12 +4,16 @@ using System.Collections.ObjectModel;
 using UNIQUMkidsCore;
 
 Parent usr;
+Teacher teach;
 bool auth = false;
+Console.ForegroundColor = ConsoleColor.Black;
+Console.BackgroundColor = ConsoleColor.Yellow;
+bool isParent = false;
 
 Console.WriteLine("[+] Добро пожаловать в UNIQUMkids!");
 while (!auth)
 {
-    Console.WriteLine("[+] Для авторизации введите /login, для регистрации /registration");
+    Console.WriteLine("[+] Для авторизации введите /login, для регистрации /registration, для входа как сотрудник /loginEmp");
     string answer = Console.ReadLine();
     if (answer == "/login")
     {
@@ -23,6 +27,11 @@ while (!auth)
         {
             Console.WriteLine($"Приветсвуем Вас, {usr.Name}");
             auth = true;
+            isParent = true;
+        }
+        else
+        {
+            Console.WriteLine("[+] Логин или пароль не верный, попробуйте еще раз!");
         }
     }
     else if (answer == "/registration")
@@ -45,9 +54,30 @@ while (!auth)
                 correcInput = true;
                 Console.WriteLine("[+] Загрузка...");
                 usr = MainFunc.Registration(usrName, usrSurname, usrNumber, usrLogin, usrPassword);
-                Console.WriteLine($"Приветсвуем Вас, {usr.Name}");
+                Console.WriteLine($"Приветсвуем Вас, {usr.Name}!");
                 auth = true;
+                break;
             }
+
+        }
+    }
+    else if (answer == "/loginEmp")
+    {
+        Console.WriteLine("[+] Введите логин для авторизации: ");
+        string loginUsr = Console.ReadLine();
+        Console.WriteLine("[+] Введите пароль для авторизации: ");
+        string passwUsr = Console.ReadLine();
+        Console.WriteLine("[+] Загрузка...");
+        teach = MainFunc.AuthorizationTeacher(loginUsr, passwUsr);
+        if (teach != null)
+        {
+            Console.WriteLine($"Приветсвуем Вас, {teach.Name}");
+            auth = true;
+            MainMenu((int)teach.id_Role);
+        }
+        else
+        {
+            Console.WriteLine("[+] Логин или пароль не верный, попробуйте еще раз!");
         }
     }
     else
@@ -55,3 +85,15 @@ while (!auth)
         Console.WriteLine("Неизвестная команда!");
     }
 }
+
+
+void MainMenu(int idRole)
+{
+    bool exit = false;
+    while (!exit)
+    {
+        Console.WriteLine("[+] Доступные команды: /addChild, /myChilds, /lessonInfo");
+    }
+}
+
+

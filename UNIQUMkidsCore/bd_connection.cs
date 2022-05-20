@@ -8,6 +8,6 @@ namespace UNIQUMkidsCore
 {
     public class bd_connection
     {
-        public static UNIQUMkidsEntities connection = new UNIQUMkidsEntities();
+        public static UNIQUMkidsEntitiec connection = new UNIQUMkidsEntitiec();
     }
 }

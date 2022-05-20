@@ -12,26 +12,15 @@ namespace UNIQUMkidsCore
     using System;
     using System.Collections.Generic;
     
-    public partial class Teacher
+    public partial class Employee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Teacher()
-        {
-            this.LessonChild = new HashSet<LessonChild>();
-        }
-    
-        public int id_Teacher { get; set; }
-        public string Surname { get; set; }
+        public int id_Usr { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Years { get; set; }
+        public string Surname { get; set; }
+        public Nullable<int> id_Role { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public string Number { get; set; }
-        public bool IsDeleted { get; set; }
-        public Nullable<int> id_Role { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonChild> LessonChild { get; set; }
         public virtual Role Role { get; set; }
     }
 }

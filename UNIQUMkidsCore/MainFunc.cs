@@ -16,6 +16,14 @@ namespace UNIQUMkidsCore
             return parent;
         }
 
+        public static Teacher AuthorizationTeacher(string login, string password)
+        {
+            
+            List<Teacher> usr = GetDataFromDB.GetTeacher();
+            Teacher teacher = usr.Where(a => a.Login == login && a.Password == password).FirstOrDefault();
+            return teacher;
+        }
+
         public static Parent Registration(string Name, string Surname, string Number, string login, string password)
         {
             Parent usr = new Parent();

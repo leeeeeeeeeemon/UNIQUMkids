@@ -18,22 +18,31 @@ namespace UNIQUMkidsCore
             return new List<Parent>(bd_connection.connection.Parent.ToList());
         }
 
-        public List<Gender> GetGender()
+        public static List<Gender> GetGender()
         {
             return new List<Gender>(bd_connection.connection.Gender.ToList());
         }
 
-        public List<Lesson> GetLesson()
+        public static List<Teacher> GetTeacher()
+        {
+            return new List<Teacher>(bd_connection.connection.Teacher.ToList());
+        }
+        public static List<Employee> GetEmployee()
+        {
+            return new List<Employee>(bd_connection.connection.Employee.ToList());
+        }
+
+        public static List<Lesson> GetLesson()
         {
             return new List<Lesson>(bd_connection.connection.Lesson.ToList());
         }
 
-        public List<LessonChild> GetLessonChild()
+        public static List<LessonChild> GetLessonChild()
         {
             return new List<LessonChild>(bd_connection.connection.LessonChild.ToList());
         }
 
-        public List<Raspisanie> GetRaspisanie()
+        public static List<Raspisanie> GetRaspisanie()
         {
             return new List<Raspisanie>(bd_connection.connection.Raspisanie.ToList());
         }

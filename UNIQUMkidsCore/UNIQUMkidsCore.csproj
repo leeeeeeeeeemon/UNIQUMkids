@@ -56,6 +56,9 @@
       <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DeleteFromBD.cs" />
+    <Compile Include="Employee.cs">
+      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Gender.cs">
       <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
     </Compile>
@@ -100,32 +103,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
     <EntityDeploy Include="UNIQUMkidsBD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UNIQUMkidsBD.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
     <None Include="UNIQUMkidsBD.edmx.diagram">
       <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="UNIQUMkidsBD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UNIQUMkidsBD.Context.cs</LastGenOutput>
       <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
+      <LastGenOutput>UNIQUMkidsBD.Context.cs</LastGenOutput>
     </Content>
     <Content Include="UNIQUMkidsBD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
       <LastGenOutput>UNIQUMkidsBD.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
