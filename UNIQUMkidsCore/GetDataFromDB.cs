@@ -10,12 +10,12 @@ namespace UNIQUMkidsCore
     {
         public static List<Child> GetChild()
         {
-            return new List<Child>(bd_connection.connection.Child.ToList());
+            return new List<Child>(bd_connection.connection.Child.ToList().Where(p => p.IsDeleted == false));
         }
 
         public static List<Parent> GetParent()
         {
-            return new List<Parent>(bd_connection.connection.Parent.ToList());
+            return new List<Parent>(bd_connection.connection.Parent.ToList().Where(p => p.IsDeleted == false));
         }
 
         public static List<Gender> GetGender()
@@ -25,21 +25,17 @@ namespace UNIQUMkidsCore
 
         public static List<Teacher> GetTeacher()
         {
-            return new List<Teacher>(bd_connection.connection.Teacher.ToList());
-        }
-        public static List<Employee> GetEmployee()
-        {
-            return new List<Employee>(bd_connection.connection.Employee.ToList());
+            return new List<Teacher>(bd_connection.connection.Teacher.ToList().Where(p => p.IsDeleted == false));
         }
 
         public static List<Lesson> GetLesson()
         {
-            return new List<Lesson>(bd_connection.connection.Lesson.ToList());
+            return new List<Lesson>(bd_connection.connection.Lesson.ToList().Where(p => p.IsDeleted == false));
         }
 
         public static List<LessonChild> GetLessonChild()
         {
-            return new List<LessonChild>(bd_connection.connection.LessonChild.ToList());
+            return new List<LessonChild>(bd_connection.connection.LessonChild.ToList().Where(p => p.IsDeleted == false));
         }
 
         public static List<Raspisanie> GetRaspisanie()

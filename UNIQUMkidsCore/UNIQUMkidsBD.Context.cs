@@ -13,10 +13,10 @@ namespace UNIQUMkidsCore
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UNIQUMkidsEntitiec : DbContext
+    public partial class UNIQUMkidsDataBase : DbContext
     {
-        public UNIQUMkidsEntitiec()
-            : base("name=UNIQUMkidsEntitiec")
+        public UNIQUMkidsDataBase()
+            : base("name=UNIQUMkidsDataBase")
         {
         }
     
@@ -26,7 +26,6 @@ namespace UNIQUMkidsCore
         }
     
         public virtual DbSet<Child> Child { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Lesson> Lesson { get; set; }
         public virtual DbSet<LessonChild> LessonChild { get; set; }

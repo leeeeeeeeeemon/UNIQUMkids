@@ -10,41 +10,30 @@
             <PropertyRef Name="id_Child" />
           </Key>
           <Property Name="id_Child" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Surname" Type="nchar" MaxLength="50" />
           <Property Name="Year" Type="int" />
           <Property Name="id_Gender" Type="int" />
           <Property Name="id_Parent" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="id_Usr" />
-          </Key>
-          <Property Name="id_Usr" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="20" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
-          <Property Name="id_Role" Type="int" />
-          <Property Name="Login" Type="nchar" MaxLength="20" />
-          <Property Name="Password" Type="nchar" MaxLength="20" />
-        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="id_Gender" />
           </Key>
-          <Property Name="id_Gender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="3" />
+          <Property Name="id_Gender" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
             <PropertyRef Name="id_Lesson" />
           </Key>
           <Property Name="id_Lesson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="20" />
+          <Property Name="Name" Type="nchar" MaxLength="40" />
           <Property Name="MinYear" Type="int" />
           <Property Name="MaxYear" Type="int" />
           <Property Name="Price" Type="money" />
-          <Property Name="Description" Type="nchar" MaxLength="300" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="LessonChild">
@@ -63,10 +52,10 @@
             <PropertyRef Name="id_Parent" />
           </Key>
           <Property Name="id_Parent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Surname" Type="nchar" MaxLength="50" />
-          <Property Name="Name" Type="nchar" MaxLength="30" />
-          <Property Name="Login" Type="nchar" MaxLength="20" />
-          <Property Name="Password" Type="nchar" MaxLength="20" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="id_Role" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
@@ -76,15 +65,15 @@
             <PropertyRef Name="id_Raspisanie" />
           </Key>
           <Property Name="id_Raspisanie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Days" Type="nchar" MaxLength="200" />
-          <Property Name="Time" Type="nchar" MaxLength="200" />
+          <Property Name="Days" Type="nvarchar" MaxLength="200" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="id_Role" />
           </Key>
-          <Property Name="id_Role" Type="int" Nullable="false" />
+          <Property Name="id_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -102,12 +91,12 @@
             <PropertyRef Name="id_Teacher" />
           </Key>
           <Property Name="id_Teacher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Surname" Type="nchar" MaxLength="30" />
-          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Years" Type="int" />
-          <Property Name="Login" Type="nchar" MaxLength="20" />
-          <Property Name="Password" Type="nchar" MaxLength="20" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="Number" Type="nvarchar" MaxLength="11" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="id_Role" Type="int" />
         </EntityType>
@@ -132,18 +121,6 @@
             </Principal>
             <Dependent Role="Child">
               <PropertyRef Name="id_Parent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employee_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="id_Role" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="id_Role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -221,7 +198,6 @@
         </Association>
         <EntityContainer Name="Хранилище UNIQUMkidsModelContainer">
           <EntitySet Name="Child" EntityType="Self.Child" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LessonChild" EntityType="Self.LessonChild" Schema="dbo" store:Type="Tables" />
@@ -237,10 +213,6 @@
           <AssociationSet Name="FK_Child_Parent" Association="Self.FK_Child_Parent">
             <End Role="Parent" EntitySet="Parent" />
             <End Role="Child" EntitySet="Child" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
           <AssociationSet Name="FK_LessonChild_Child" Association="Self.FK_LessonChild_Child">
             <End Role="Child" EntitySet="Child" />
@@ -276,7 +248,7 @@
             <PropertyRef Name="id_Child" />
           </Key>
           <Property Name="id_Child" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Year" Type="Int32" />
           <Property Name="id_Gender" Type="Int32" />
@@ -286,24 +258,12 @@
           <NavigationProperty Name="Parent" Relationship="Self.FK_Child_Parent" FromRole="Child" ToRole="Parent" />
           <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Child" FromRole="Child" ToRole="LessonChild" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="id_Usr" />
-          </Key>
-          <Property Name="id_Usr" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="id_Role" Type="Int32" />
-          <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
-        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="id_Gender" />
           </Key>
-          <Property Name="id_Gender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="id_Gender" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Child" Relationship="Self.FK_Child_Gender" FromRole="Gender" ToRole="Child" />
         </EntityType>
         <EntityType Name="Lesson">
@@ -311,11 +271,11 @@
             <PropertyRef Name="id_Lesson" />
           </Key>
           <Property Name="id_Lesson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
           <Property Name="MinYear" Type="Int32" />
           <Property Name="MaxYear" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Lesson" FromRole="Lesson" ToRole="LessonChild" />
         </EntityType>
@@ -339,10 +299,10 @@
             <PropertyRef Name="id_Parent" />
           </Key>
           <Property Name="id_Parent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_Role" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
@@ -354,8 +314,8 @@
             <PropertyRef Name="id_Raspisanie" />
           </Key>
           <Property Name="id_Raspisanie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Days" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-          <Property Name="Time" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Days" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="Raspisanie" ToRole="LessonChild" />
         </EntityType>
@@ -363,11 +323,10 @@
           <Key>
             <PropertyRef Name="id_Role" />
           </Key>
-          <Property Name="id_Role" Type="Int32" Nullable="false" />
+          <Property Name="id_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
           <NavigationProperty Name="Parent" Relationship="Self.FK_Parent_Role" FromRole="Role" ToRole="Parent" />
-          <NavigationProperty Name="Teacher" Relationship="UNIQUMkidsModel.FK_Teacher_Role" FromRole="Role" ToRole="Teacher" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Teacher_Role" FromRole="Role" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -384,16 +343,16 @@
             <PropertyRef Name="id_Teacher" />
           </Key>
           <Property Name="id_Teacher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Years" Type="Int32" />
-          <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="id_Role" Type="Int32" />
           <NavigationProperty Name="LessonChild" Relationship="Self.FK_LessonChild_Teacher" FromRole="Teacher" ToRole="LessonChild" />
-          <NavigationProperty Name="Role" Relationship="UNIQUMkidsModel.FK_Teacher_Role" FromRole="Teacher" ToRole="Role" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Teacher_Role" FromRole="Teacher" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Child_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
@@ -428,18 +387,6 @@
             </Principal>
             <Dependent Role="LessonChild">
               <PropertyRef Name="id_Child" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employee_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="id_Role" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="id_Role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -491,9 +438,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UNIQUMkidsEntitiec" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Teacher_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_Role" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UNIQUMkidsDataBase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Child" EntityType="Self.Child" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
           <EntitySet Name="Lesson" EntityType="Self.Lesson" />
           <EntitySet Name="LessonChild" EntityType="Self.LessonChild" />
@@ -514,10 +472,6 @@
             <End Role="Child" EntitySet="Child" />
             <End Role="LessonChild" EntitySet="LessonChild" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
           <AssociationSet Name="FK_LessonChild_Lesson" Association="Self.FK_LessonChild_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonChild" EntitySet="LessonChild" />
@@ -534,29 +488,17 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Parent" EntitySet="Parent" />
           </AssociationSet>
-          <AssociationSet Name="FK_Teacher_Role" Association="UNIQUMkidsModel.FK_Teacher_Role">
+          <AssociationSet Name="FK_Teacher_Role" Association="Self.FK_Teacher_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Teacher_Role">
-          <End Type="UNIQUMkidsModel.Role" Role="Role" Multiplicity="0..1" />
-          <End Type="UNIQUMkidsModel.Teacher" Role="Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="id_Role" />
-            </Principal>
-            <Dependent Role="Teacher">
-              <PropertyRef Name="id_Role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище UNIQUMkidsModelContainer" CdmEntityContainer="UNIQUMkidsEntitiec">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UNIQUMkidsModelContainer" CdmEntityContainer="UNIQUMkidsDataBase">
           <EntitySetMapping Name="Child">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.Child">
               <MappingFragment StoreEntitySet="Child">
@@ -567,18 +509,6 @@
                 <ScalarProperty Name="id_Gender" ColumnName="id_Gender" />
                 <ScalarProperty Name="id_Parent" ColumnName="id_Parent" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="UNIQUMkidsModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="id_Usr" ColumnName="id_Usr" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="id_Role" ColumnName="id_Role" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

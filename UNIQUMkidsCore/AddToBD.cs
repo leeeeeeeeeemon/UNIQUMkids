@@ -31,5 +31,11 @@ namespace UNIQUMkidsCore
             bd_connection.connection.Teacher.Add(teacher);
             bd_connection.connection.SaveChanges();
         }
+
+        public static void AddChild(Child child)
+        {
+            bd_connection.connection.Child.Add(child);
+            bd_connection.connection.SaveChanges();
+        }
     }
 }

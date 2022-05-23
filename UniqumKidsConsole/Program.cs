@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more 
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using UNIQUMkidsCore;
 
 Parent usr;
@@ -8,7 +8,6 @@ Teacher teach;
 bool auth = false;
 Console.ForegroundColor = ConsoleColor.Black;
 Console.BackgroundColor = ConsoleColor.Yellow;
-bool isParent = false;
 
 Console.WriteLine("[+] Добро пожаловать в UNIQUMkids!");
 while (!auth)
@@ -27,7 +26,7 @@ while (!auth)
         {
             Console.WriteLine($"Приветсвуем Вас, {usr.Name}");
             auth = true;
-            isParent = true;
+            MainMenu((int)usr.id_Role, usr.id_Parent);
         }
         else
         {
@@ -49,13 +48,22 @@ while (!auth)
             string usrLogin = Console.ReadLine();
             Console.WriteLine("[+] Введите Ваш пароль:");
             string usrPassword = Console.ReadLine();
+            int id_Role = 2;
             if (usrLogin != null && usrName != null && usrSurname != null && usrPassword != null)
             {
                 correcInput = true;
                 Console.WriteLine("[+] Загрузка...");
-                usr = MainFunc.Registration(usrName, usrSurname, usrNumber, usrLogin, usrPassword);
-                Console.WriteLine($"Приветсвуем Вас, {usr.Name}!");
+                Parent par = new Parent();
+                par.Login = usrLogin;
+                par.Password = usrPassword;
+                par.Name = usrName;
+                par.Surname = usrSurname;
+                par.Number = usrNumber;
+                par.id_Role = id_Role;
+                AddToBD.AddParent(par);
+                Console.WriteLine($"Приветсвуем Вас, {par.Name}!");
                 auth = true;
+                MainMenu((int)par.id_Role, par.id_Parent);
                 break;
             }
 
@@ -73,26 +81,124 @@ while (!auth)
         {
             Console.WriteLine($"Приветсвуем Вас, {teach.Name}");
             auth = true;
-            MainMenu((int)teach.id_Role);
+            MainMenu((int)teach.id_Role, teach.id_Teacher);
         }
         else
         {
-            Console.WriteLine("[+] Логин или пароль не верный, попробуйте еще раз!");
+            Console.WriteLine("[!] Логин или пароль не верный, попробуйте еще раз!");
         }
     }
     else
     {
-        Console.WriteLine("Неизвестная команда!");
+        Console.WriteLine("[!] Неизвестная команда!");
     }
 }
 
 
-void MainMenu(int idRole)
+void MainMenu(int idRole, int idUser)
 {
     bool exit = false;
     while (!exit)
     {
-        Console.WriteLine("[+] Доступные команды: /addChild, /myChilds, /lessonInfo");
+        if(idRole == 2)
+        {
+            Console.WriteLine("[+] Доступные команды: /addChild, /myChilds, /lessonInfo /siqnUpLesson" );
+            string command = Console.ReadLine();
+            if (command == "/addChild")
+            {
+                Child newChild = new Child();
+                Console.WriteLine("[+] Введите имя ребенка: ");
+                newChild.Name = Console.ReadLine();
+                Console.WriteLine("[+] Введите фамилию ребенка: ");
+                newChild.Surname = Console.ReadLine();
+                Console.WriteLine("[+] Введите возраст ребенка: ");
+                newChild.Year = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("[+] Введите пол ребенка ребенка (м/ж): ");
+                if (Console.ReadLine() == "ж")
+                {
+                    newChild.id_Gender = 2;
+                }
+                else
+                {
+                    newChild.id_Gender = 1;
+                }
+                newChild.id_Parent = idUser;
+                newChild.IsDeleted = false;
+                AddToBD.AddChild(newChild);
+                Console.WriteLine("[+] Ребёнок успешно добавлен!");
+            }
+            else if (command == "/myChilds")
+            {
+                List<Child> childs = MainFunc.childsOnParent(idUser);
+                foreach (Child child in childs)
+                {
+                    Console.WriteLine("----------------------------");
+                    Console.WriteLine($"[+] Имя: {child.Name}");
+                    Console.WriteLine($"[+] Фамилия: {child.Surname}");
+                    Console.WriteLine($"[+] Возраст: {child.Year}");
+                    if(child.id_Gender == 1)
+                    {
+                        Console.WriteLine($"[+] Пол: Мужской");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[+] Пол: Женский");
+                    }
+                    
+                }
+                Console.WriteLine("");
+            }
+            else if(command == "/lessonInfo")
+            {
+                List<Lesson> lessons = GetDataFromDB.GetLesson();
+                foreach (Lesson lesson in lessons)
+                {
+                    Console.WriteLine("----------------------------");
+                    Console.WriteLine($"[+] Название: {lesson.Name}");
+                    Console.WriteLine($"[+] Минимальное количество лет: {lesson.MinYear}");
+                    Console.WriteLine($"[+] Максимальное количество лет: {lesson.MaxYear}");
+                    Console.WriteLine($"[+] Описание: {lesson.Description}");
+                    Console.WriteLine($"[+] Стоимость: {lesson.Price}");
+                }
+                Console.WriteLine();
+            }
+            else if(command == "siqnUpLesson")
+            {
+                Console.WriteLine("Введите название курса");
+                List<Lesson> lessons = GetDataFromDB.GetLesson();
+                int count = 1;
+                foreach (Lesson lesson in lessons)
+                {
+                    Console.WriteLine("----------------------------");
+                    Console.WriteLine($"[+] {count}. {lesson.Name}");
+                    count++;
+                }
+                string choise = Console.ReadLine();
+                foreach (Lesson lesson in lessons)
+                {
+                    if(choise == lesson.Name)
+                    {
+                        Console.WriteLine("Введите имя ребенка для записи");
+                        string name = Console.ReadLine();
+                        List<Child> child = MainFunc.childsOnParent(idUser);
+                        int idChild = 0;
+                        foreach (Child child2 in child)
+                        {
+                            if(child2.Name == name)
+                            {
+                                idChild = child2.id_Child;
+                            }
+                        }
+
+                        if(idChild != 0)
+                        {
+                            //Закончить добавление записаь на курс, добавить расписание и учителей
+                        }
+                    }
+                }
+            }
+
+        }
     }
 }
 

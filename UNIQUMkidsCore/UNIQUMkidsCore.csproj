@@ -56,9 +56,6 @@
       <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DeleteFromBD.cs" />
-    <Compile Include="Employee.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Gender.cs">
       <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
     </Compile>

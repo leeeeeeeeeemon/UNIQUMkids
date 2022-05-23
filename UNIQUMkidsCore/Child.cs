@@ -21,7 +21,7 @@ namespace UNIQUMkidsCore
         }
     
         public int id_Child { get; set; }
-        public Nullable<int> Name { get; set; }
+        public string Name { get; set; }
         public string Surname { get; set; }
         public Nullable<int> Year { get; set; }
         public Nullable<int> id_Gender { get; set; }

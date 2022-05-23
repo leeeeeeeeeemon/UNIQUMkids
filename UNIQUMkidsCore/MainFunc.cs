@@ -24,16 +24,11 @@ namespace UNIQUMkidsCore
             return teacher;
         }
 
-        public static Parent Registration(string Name, string Surname, string Number, string login, string password)
+        public static List<Child> childsOnParent(int id_Parent)
         {
-            Parent usr = new Parent();
-            usr.Login = login;
-            usr.Password = password;
-            usr.Name = Name;
-            usr.Surname = Surname;
-            usr.Number = Number;
-            AddToBD.AddParent(usr);
-            return usr;
+            List<Child> childs = GetDataFromDB.GetChild();
+            List<Child> currentChilds = childs.Where(p => p.id_Parent == id_Parent).ToList();
+            return currentChilds;
         }
     }
 }
