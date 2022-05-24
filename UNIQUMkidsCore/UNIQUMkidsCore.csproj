@@ -53,76 +53,76 @@
     <Compile Include="AddToBD.cs" />
     <Compile Include="bd_connection.cs" />
     <Compile Include="Child.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DeleteFromBD.cs" />
     <Compile Include="Gender.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetDataFromDB.cs" />
     <Compile Include="Lesson.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="LessonChild.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MainFunc.cs" />
     <Compile Include="Parent.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Raspisanie.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Teacher.cs">
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UNIQUMkidsBD.Context.cs">
+    <Compile Include="UNIQUMkidsDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UNIQUMkidsBD.Context.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="UNIQUMkidsBD.cs">
+    <Compile Include="UNIQUMkidsDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UNIQUMkidsBD.tt</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UNIQUMkidsBD.Designer.cs">
+    <Compile Include="UNIQUMkidsDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
+      <DependentUpon>UNIQUMkidsDB.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="UNIQUMkidsBD.edmx">
+    <EntityDeploy Include="UNIQUMkidsDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UNIQUMkidsBD.Designer.cs</LastGenOutput>
+      <LastGenOutput>UNIQUMkidsDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="UNIQUMkidsBD.edmx.diagram">
-      <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
+    <None Include="UNIQUMkidsDB.edmx.diagram">
+      <DependentUpon>UNIQUMkidsDB.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UNIQUMkidsBD.Context.tt">
+    <Content Include="UNIQUMkidsDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
-      <LastGenOutput>UNIQUMkidsBD.Context.cs</LastGenOutput>
+      <DependentUpon>UNIQUMkidsDB.edmx</DependentUpon>
+      <LastGenOutput>UNIQUMkidsDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="UNIQUMkidsBD.tt">
+    <Content Include="UNIQUMkidsDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UNIQUMkidsBD.edmx</DependentUpon>
-      <LastGenOutput>UNIQUMkidsBD.cs</LastGenOutput>
+      <DependentUpon>UNIQUMkidsDB.edmx</DependentUpon>
+      <LastGenOutput>UNIQUMkidsDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

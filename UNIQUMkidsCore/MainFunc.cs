@@ -30,5 +30,38 @@ namespace UNIQUMkidsCore
             List<Child> currentChilds = childs.Where(p => p.id_Parent == id_Parent).ToList();
             return currentChilds;
         }
+
+        public static string nameTeacherOnLesson(Lesson les)
+        {
+            string name;
+            string surname;
+            List<Teacher> teach = GetDataFromDB.GetTeacher();
+            Teacher currentTeach = teach.Where(p => p.id_Teacher == les.id_Teacher).FirstOrDefault();
+            return currentTeach.Name + " " + currentTeach.Surname;
+        }
+
+        public static string nameLessoOnId(int id)
+        {
+            Lesson lessons = GetDataFromDB.GetLesson().Where(p => p.id_Lesson == id).FirstOrDefault();
+            return lessons.Name;
+        }
+
+        public static string nameChildOnId(int id)
+        {
+            Child child = GetDataFromDB.GetChild().Where(p => p.id_Child == id).FirstOrDefault();
+            return child.Surname + " " + child.Name;
+        }
+        public static string nameRaspOnId(int id)
+        {
+            Raspisanie raspisanie = GetDataFromDB.GetRaspisanie().Where(p => p.id_Raspisanie == id).FirstOrDefault();
+            return raspisanie.Days + " " + raspisanie.Time;
+        }
+
+        public static string getParentNumberOnChildID(int id)
+        {
+            Child child = GetDataFromDB.GetChild().Where(p => p.id_Child == id).FirstOrDefault();
+            Parent parent = GetDataFromDB.GetParent().Where(p => p.id_Parent == child.id_Parent).FirstOrDefault();
+            return parent.Number;
+        }
     }
 }

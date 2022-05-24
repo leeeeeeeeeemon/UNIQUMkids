@@ -27,7 +27,9 @@ namespace UNIQUMkidsCore
         public Nullable<decimal> Price { get; set; }
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
+        public Nullable<int> id_Teacher { get; set; }
     
+        public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonChild> LessonChild { get; set; }
     }

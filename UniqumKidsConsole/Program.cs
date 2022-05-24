@@ -157,14 +157,16 @@ void MainMenu(int idRole, int idUser)
                     Console.WriteLine($"[+] Название: {lesson.Name}");
                     Console.WriteLine($"[+] Минимальное количество лет: {lesson.MinYear}");
                     Console.WriteLine($"[+] Максимальное количество лет: {lesson.MaxYear}");
+                    Console.WriteLine($"[+] Преподаватель {MainFunc.nameTeacherOnLesson(lesson)}");
                     Console.WriteLine($"[+] Описание: {lesson.Description}");
                     Console.WriteLine($"[+] Стоимость: {lesson.Price}");
                 }
                 Console.WriteLine();
             }
-            else if(command == "siqnUpLesson")
+            else if(command == "/siqnUpLesson")
             {
-                Console.WriteLine("Введите название курса");
+                LessonChild choiseLesson = new LessonChild();
+                Console.WriteLine("[+] Введите номер курса");
                 List<Lesson> lessons = GetDataFromDB.GetLesson();
                 int count = 1;
                 foreach (Lesson lesson in lessons)
@@ -173,31 +175,72 @@ void MainMenu(int idRole, int idUser)
                     Console.WriteLine($"[+] {count}. {lesson.Name}");
                     count++;
                 }
-                string choise = Console.ReadLine();
+                int choise = Convert.ToInt32(Console.ReadLine());
+                count = 1;
                 foreach (Lesson lesson in lessons)
                 {
-                    if(choise == lesson.Name)
+                    if(choise == count)
                     {
-                        Console.WriteLine("Введите имя ребенка для записи");
+                        choiseLesson.id_Lesson = lesson.id_Lesson;
+                        choiseLesson.id_Teacher = lesson.id_Teacher;
+                        Console.WriteLine("[+] Введите имя ребенка для записи");
                         string name = Console.ReadLine();
                         List<Child> child = MainFunc.childsOnParent(idUser);
-                        int idChild = 0;
                         foreach (Child child2 in child)
                         {
                             if(child2.Name == name)
                             {
-                                idChild = child2.id_Child;
+                                choiseLesson.id_Child = child2.id_Child;
                             }
                         }
 
-                        if(idChild != 0)
+                        if(choiseLesson.id_Child != null)
                         {
                             //Закончить добавление записаь на курс, добавить расписание и учителей
+                            Console.WriteLine("[+] Выберите вариант расписания (1, 2 и тд.)" );
+                            List<Raspisanie> rasp = GetDataFromDB.GetRaspisanie();
+                            int count2 = 1;
+                            foreach( Raspisanie rasp2 in rasp)
+                            {
+                                Console.WriteLine("----------------------------");
+                                Console.WriteLine($"{count2}. {rasp2.Days} , Время: {rasp2.Time}");
+                                count2++;
+                            }
+                            int numberChoise = Convert.ToInt32(Console.ReadLine());
+                            count2 = 1;
+                            foreach (Raspisanie rasp2 in rasp)
+                            {
+                                if(numberChoise == count2)
+                                {
+                                    choiseLesson.id_Raspisanie = rasp2.id_Raspisanie;
+                                }
+                                count2++;
+                            }
+                            choiseLesson.IsDeleted = false;
+                            AddToBD.AddLessonChild(choiseLesson);
+                            Console.WriteLine("[+] Заявка успешно создана в скором времени с вами свяжутся!");
                         }
                     }
+                    count++;
                 }
             }
 
+        }else if(idRole == 1)
+        {
+            Console.WriteLine("[+] Доступные команды: /myLessonRequest");
+            string answer = Console.ReadLine();
+            if(answer == "/myLessonRequest")
+            {
+                List<LessonChild> lessonChildren = GetDataFromDB.GetLessonChild().Where(p => p.id_Teacher == idUser).ToList();
+                foreach( LessonChild lessonChild in lessonChildren)
+                {
+                    Console.WriteLine("----------------------------");
+                    Console.WriteLine($"[+] Название предмета: {MainFunc.nameLessoOnId((int)lessonChild.id_Lesson)}");
+                    Console.WriteLine($"[+] Имя ребенка: {MainFunc.nameChildOnId((int)lessonChild.id_Child)}");
+                    Console.WriteLine($"[+] Телефон родителя: {MainFunc.getParentNumberOnChildID((int)lessonChild.id_Child)}");
+                    Console.WriteLine($"[+] Расписание: {MainFunc.nameRaspOnId((int)lessonChild.id_Raspisanie)}");
+                }
+            }
         }
     }
 }

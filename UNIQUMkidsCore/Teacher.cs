@@ -17,6 +17,7 @@ namespace UNIQUMkidsCore
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Teacher()
         {
+            this.Lesson = new HashSet<Lesson>();
             this.LessonChild = new HashSet<LessonChild>();
         }
     
@@ -30,6 +31,8 @@ namespace UNIQUMkidsCore
         public bool IsDeleted { get; set; }
         public Nullable<int> id_Role { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Lesson> Lesson { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonChild> LessonChild { get; set; }
         public virtual Role Role { get; set; }

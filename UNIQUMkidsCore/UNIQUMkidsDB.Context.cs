@@ -13,10 +13,10 @@ namespace UNIQUMkidsCore
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UNIQUMkidsDataBase : DbContext
+    public partial class UNIQUMkidsEntities : DbContext
     {
-        public UNIQUMkidsDataBase()
-            : base("name=UNIQUMkidsDataBase")
+        public UNIQUMkidsEntities()
+            : base("name=UNIQUMkidsEntities")
         {
         }
     
