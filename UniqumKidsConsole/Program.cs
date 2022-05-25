@@ -60,11 +60,19 @@ while (!auth)
                 par.Surname = usrSurname;
                 par.Number = usrNumber;
                 par.id_Role = id_Role;
-                AddToBD.AddParent(par);
-                Console.WriteLine($"Приветсвуем Вас, {par.Name}!");
-                auth = true;
-                MainMenu((int)par.id_Role, par.id_Parent);
-                break;
+                if (MainFunc.CheckRegistrationLogin(par.Login))
+                {
+                    AddToBD.AddParent(par);
+                    Console.WriteLine($"Приветсвуем Вас, {par.Name}!");
+                    auth = true;
+                    MainMenu((int)par.id_Role, par.id_Parent);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("[+] Пользователь с таким логином уже существует");
+                }
+                
             }
 
         }

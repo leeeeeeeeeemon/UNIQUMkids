@@ -16,6 +16,22 @@ namespace UNIQUMkidsCore
             return parent;
         }
 
+        public static bool CheckRegistrationLogin(string login)
+        {
+            List<Parent> usr = GetDataFromDB.GetParent();
+            Parent parent = usr.Where(a => a.Login == login).FirstOrDefault();
+            List<Teacher> teach = GetDataFromDB.GetTeacher();
+            Teacher teacher = teach.Where(a => a.Login == login).FirstOrDefault();
+            if (parent == null && teach == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static Teacher AuthorizationTeacher(string login, string password)
         {
             
@@ -33,8 +49,6 @@ namespace UNIQUMkidsCore
 
         public static string nameTeacherOnLesson(Lesson les)
         {
-            string name;
-            string surname;
             List<Teacher> teach = GetDataFromDB.GetTeacher();
             Teacher currentTeach = teach.Where(p => p.id_Teacher == les.id_Teacher).FirstOrDefault();
             return currentTeach.Name + " " + currentTeach.Surname;
