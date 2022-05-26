@@ -54,6 +54,7 @@ namespace UNIQUMkidsWPF
                                       + Environment.NewLine + "и многому другому!"
                                        + Environment.NewLine + "UniqumKids - с заботой о будущем Ваших детей"
                                         + Environment.NewLine + "Тел.: 89-503-203-555";
+            
         }
 
         public void press()
@@ -61,9 +62,19 @@ namespace UNIQUMkidsWPF
 
         }
 
-        private void HamburgerMenuItem_Selected(object sender, RoutedEventArgs e)
+        private void HamburgerMenuItem_Child(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("krut");
+        }
+
+        private void HamburgerMenuItem_Lesson(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HamburgerMenuItem_SiqnUp(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
