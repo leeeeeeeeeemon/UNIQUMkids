@@ -30,7 +30,7 @@ while (!auth)
         }
         else
         {
-            Console.WriteLine("[+] Логин или пароль не верный, попробуйте еще раз!");
+            Console.WriteLine("[!] Логин или пароль не верный, попробуйте еще раз!");
         }
     }
     else if (answer == "/registration")
@@ -70,7 +70,7 @@ while (!auth)
                 }
                 else
                 {
-                    Console.WriteLine("[+] Пользователь с таким логином уже существует");
+                    Console.WriteLine("[!] Пользователь с таким логином уже существует");
                 }
                 
             }
@@ -87,7 +87,7 @@ while (!auth)
         teach = MainFunc.AuthorizationTeacher(loginUsr, passwUsr);
         if (teach != null)
         {
-            Console.WriteLine($"Приветсвуем Вас, {teach.Name}");
+            Console.WriteLine($"[+] Приветсвуем Вас, {teach.Name}");
             auth = true;
             MainMenu((int)teach.id_Role, teach.id_Teacher);
         }

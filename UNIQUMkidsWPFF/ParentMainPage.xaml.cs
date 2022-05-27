@@ -64,7 +64,7 @@ namespace UNIQUMkidsWPF
 
         private void HamburgerMenuItem_Child(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("krut");
+            NavigationService.Navigate(new ParentChildPage(idParent));
         }
 
         private void HamburgerMenuItem_Lesson(object sender, RoutedEventArgs e)
