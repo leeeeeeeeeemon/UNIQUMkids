@@ -22,14 +22,25 @@ namespace UNIQUMkidsWPF
     {
         int idRole;
         int idEmp;
+        List<LessonChildToList> lessonChildToLists = new List<LessonChildToList>();
+        List<Child> children = GetDataFromDB.GetChild();
+        List<LessonChild> lessonsRequest;
         public EmpMainPage(int empId, int roleId)
         {
             InitializeComponent();
             idRole = roleId;
             idEmp = empId;
             this.DataContext = this;
-            List<LessonChildToList> lessonChildToLists = new List<LessonChildToList>();
-            foreach (LessonChild lessonChild in GetDataFromDB.GetLessonChild().Where(p => p.id_Teacher == idEmp))
+            if(idRole == 1)
+            {
+                lessonsRequest = GetDataFromDB.GetLessonChild().Where(p => p.id_Teacher == idEmp).ToList();
+            }
+            else
+            {
+                lessonsRequest = GetDataFromDB.GetLessonChild();
+            }
+            
+            foreach (LessonChild lessonChild in lessonsRequest)
             {
                 LessonChildToList getLes = new LessonChildToList();
                 getLes.NameChild = MainFunc.nameChildOnId((int)lessonChild.id_Child);
@@ -40,7 +51,13 @@ namespace UNIQUMkidsWPF
             }
 
             lessonChild_list.ItemsSource = lessonChildToLists;
+            allChild_list.ItemsSource = children;
 
+            if(idRole == 1)
+            {
+                lessonChild_list.IsEnabled = false;
+                allChild_CheckBox.Visibility = Visibility.Hidden;
+            }
         }
 
         public class LessonChildToList
@@ -49,6 +66,31 @@ namespace UNIQUMkidsWPF
             public string NameChild { get; set; }
             public string NumberParent { get; set; }
             public bool isConfirmed { get; set; }
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(searchBox.Text != "")
+            {
+                List<LessonChildToList> toListsFilter = lessonChildToLists.Where( p => p.NameChild.Contains(searchBox.Text)).ToList();
+                lessonChild_list.ItemsSource = toListsFilter;
+                List<Child> toListChild = children.Where(p => p.Name.Contains(searchBox.Text)  || p.Surname.Contains(searchBox.Text)).ToList();
+                allChild_list.ItemsSource = toListChild;
+            }
+        }
+
+        private void allChild_CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(allChild_CheckBox.IsChecked == true)
+            {
+                allChild_list.Visibility = Visibility.Visible;
+                lessonChild_list.Visibility=Visibility.Hidden;
+            }
+            else
+            {
+                allChild_list.Visibility = Visibility.Hidden;
+                lessonChild_list.Visibility = Visibility.Visible;
+            }
         }
     }
 }
