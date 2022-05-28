@@ -21,6 +21,19 @@ namespace UNIQUMkidsCore
             bd_connection.connection.SaveChanges();
         }
 
+        public static string nameTeacherOnId(int id)
+        {
+            Teacher teacher = GetDataFromDB.GetTeacher().FirstOrDefault(p => p.id_Teacher == id);
+            if(teacher == null)
+            {
+                return "";
+            }
+            else
+            {
+                return teacher.Surname + " " + teacher.Name;
+
+            }
+        }
         public static bool CheckRegistrationLogin(string login)
         {
             List<Parent> usr = GetDataFromDB.GetParent();

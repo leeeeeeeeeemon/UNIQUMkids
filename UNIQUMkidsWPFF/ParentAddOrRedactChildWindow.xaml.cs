@@ -24,6 +24,8 @@ namespace UNIQUMkidsWPF
         bool createNew = false;
         int idParent;
         ListView current;
+        List<LessonChild> lessonChildren;
+        public List<LessonChildToString> lessonChildToStringsList;
         public ParentAddOrRedactChildWindow(Child child1, ref ListView list)
         {
             InitializeComponent();
@@ -32,6 +34,22 @@ namespace UNIQUMkidsWPF
             tb_Surname.Text = child1.Surname;
             tb_year.Text = Convert.ToString(child1.Year);
             current = list;
+            lessonChildren = GetDataFromDB.GetLessonChild().Where(p => p.id_Child == child1.id_Child).ToList();
+
+            lessonChildToStringsList = new List<LessonChildToString>();
+            foreach (LessonChild lessonChild in lessonChildren)
+            {
+                LessonChildToString lessonChildToString = new LessonChildToString();
+                lessonChildToString.nameLesson = MainFunc.nameLessoOnId((int)lessonChild.id_Lesson);
+                lessonChildToString.raspisaneLesson = MainFunc.nameRaspOnId((int)lessonChild.id_Raspisanie);
+                if(lessonChild.id_Teacher != null)
+                {
+                    lessonChildToString.fioTeacherLesson = MainFunc.nameTeacherOnId((int)lessonChild.id_Teacher);
+                }
+                lessonChildToStringsList.Add(lessonChildToString);
+            }
+            lessonChild_list.ItemsSource = lessonChildToStringsList;
+            
         }
         public ParentAddOrRedactChildWindow(int parentId, ref ListView list)
         {
@@ -91,5 +109,13 @@ namespace UNIQUMkidsWPF
                 Close();
             }
         }
+
+        public class LessonChildToString
+        {
+            public string nameLesson { get; set; }
+            public string raspisaneLesson { get; set; }
+            public string fioTeacherLesson { get; set; }
+        }
+
     }
 }
