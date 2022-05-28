@@ -35,7 +35,7 @@ namespace UNIQUMkidsWPF
             {
                 var n = childList.SelectedItem as Child;
 
-                Window window = new ParentAddOrRedactChildWindow(n);
+                Window window = new ParentAddOrRedactChildWindow(n, ref childList);
                 window.Show();
             }
 
@@ -44,11 +44,11 @@ namespace UNIQUMkidsWPF
 
         private void addChild_btn_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new ParentAddOrRedactChildWindow(idParent);
+            Window window = new ParentAddOrRedactChildWindow(idParent, ref childList);
             window.Show();
         }
 
-        private void updateList_btn_Click(object sender, RoutedEventArgs e)
+        public void updateList_btn_Click(object sender, RoutedEventArgs e)
         {
             childList.ItemsSource = GetDataFromDB.GetChild().Where(p => p.id_Parent == idParent);
         }

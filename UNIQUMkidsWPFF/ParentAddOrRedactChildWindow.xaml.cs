@@ -23,19 +23,22 @@ namespace UNIQUMkidsWPF
         Child child;
         bool createNew = false;
         int idParent;
-        public ParentAddOrRedactChildWindow(Child child1)
+        ListView current;
+        public ParentAddOrRedactChildWindow(Child child1, ref ListView list)
         {
             InitializeComponent();
             this.child = child1;
             tb_Name.Text = child1.Name;
             tb_Surname.Text = child1.Surname;
             tb_year.Text = Convert.ToString(child1.Year);
+            current = list;
         }
-        public ParentAddOrRedactChildWindow(int parentId)
+        public ParentAddOrRedactChildWindow(int parentId, ref ListView list)
         {
             InitializeComponent();
             createNew = true;
             idParent = parentId;
+            current = list;
         }
 
         private void addChild_btn_Click(object sender, RoutedEventArgs e)
@@ -51,6 +54,7 @@ namespace UNIQUMkidsWPF
                     newChild.id_Parent = idParent;
                     newChild.IsDeleted = false;
                     AddToBD.AddChild(newChild);
+                    current.ItemsSource = GetDataFromDB.GetChild().Where(p => p.id_Parent == idParent);
                     Close();
                 }
                 else
@@ -67,7 +71,7 @@ namespace UNIQUMkidsWPF
                         childToRedact.Surname = tb_Surname.Text;
                         childToRedact.Year = Convert.ToInt32(tb_year.Text);
                         MainFunc.SaveChangeDB();
-                        
+                        current.ItemsSource = GetDataFromDB.GetChild().Where(p => p.id_Parent == idParent);
                         Close();
                     }
                 }
@@ -83,6 +87,7 @@ namespace UNIQUMkidsWPF
             {
                 child.IsDeleted = true;
                 MainFunc.SaveChangeDB();
+                current.ItemsSource = GetDataFromDB.GetChild().Where(p => p.id_Parent == idParent);
                 Close();
             }
         }
