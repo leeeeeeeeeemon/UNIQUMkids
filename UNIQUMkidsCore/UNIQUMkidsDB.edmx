@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище UNIQUMkidsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище UNIQUMkidsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Child">
           <Key>
             <PropertyRef Name="id_Child" />
@@ -47,6 +47,7 @@
           <Property Name="id_Raspisanie" Type="int" />
           <Property Name="id_Teacher" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsConfirmed" Type="bit" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -256,8 +257,7 @@
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UNIQUMkidsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -313,6 +313,7 @@
           <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonChild_Lesson" FromRole="LessonChild" ToRole="Lesson" />
           <NavigationProperty Name="Raspisanie" Relationship="Self.FK_LessonChild_Raspisanie" FromRole="LessonChild" ToRole="Raspisanie" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_LessonChild_Teacher" FromRole="LessonChild" ToRole="Teacher" />
+          <Property Name="IsConfirmed" Type="Boolean" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -574,6 +575,7 @@
           <EntitySetMapping Name="LessonChild">
             <EntityTypeMapping TypeName="UNIQUMkidsModel.LessonChild">
               <MappingFragment StoreEntitySet="LessonChild">
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
                 <ScalarProperty Name="id_LessonChild" ColumnName="id_LessonChild" />
                 <ScalarProperty Name="id_Lesson" ColumnName="id_Lesson" />
                 <ScalarProperty Name="id_Child" ColumnName="id_Child" />

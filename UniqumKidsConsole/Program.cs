@@ -207,6 +207,7 @@ void MainMenu(int idRole, int idUser)
                                 count2++;
                             }
                             choiseLesson.IsDeleted = false;
+                            choiseLesson.IsConfirmed = false;
                             AddToBD.AddLessonChild(choiseLesson);
                             Console.WriteLine("[+] Заявка успешно создана в скором времени с вами свяжутся!");
                         }

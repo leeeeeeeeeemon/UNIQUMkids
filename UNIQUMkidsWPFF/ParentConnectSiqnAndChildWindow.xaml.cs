@@ -37,32 +37,41 @@ namespace UNIQUMkidsWPF
 
         private void addSiqnUp_btn_Click(object sender, RoutedEventArgs e)
         {
-            var comboItem = (Child)childsComboBox.SelectedValue;
-            if (MainFunc.childOnLesson(children.FirstOrDefault(p => p.Name == comboItem.Name).id_Child, idLesson))
+            if(childsComboBox.SelectedIndex != -1 && raspComboBox.SelectedIndex != -1)
             {
-                lessonChild = new LessonChild();
-                Child child = children.FirstOrDefault(p => p.Name == comboItem.Name);
-                lessonChild.id_Child = child.id_Child;
-                lessonChild.IsDeleted = false;
-                lessonChild.id_Lesson = idLesson;
-
-                if(raspComboBox.SelectedIndex == 0)
+                var comboItem = (Child)childsComboBox.SelectedValue;
+                if (MainFunc.childOnLesson(children.FirstOrDefault(p => p.Name == comboItem.Name).id_Child, idLesson))
                 {
-                    lessonChild.id_Raspisanie = 1;
+                    lessonChild = new LessonChild();
+                    Child child = children.FirstOrDefault(p => p.Name == comboItem.Name);
+                    lessonChild.id_Child = child.id_Child;
+                    lessonChild.IsDeleted = false;
+                    lessonChild.IsConfirmed = false;
+                    lessonChild.id_Lesson = idLesson;
+
+                    if (raspComboBox.SelectedIndex == 0)
+                    {
+                        lessonChild.id_Raspisanie = 1;
+                    }
+                    else
+                    {
+                        lessonChild.id_Raspisanie = 1;
+                    }
+                    AddToBD.AddLessonChild(lessonChild);
+                    MessageBox.Show("Заявка успешно создана, в скором времени с вами свяжутся");
                 }
                 else
                 {
-                    lessonChild.id_Raspisanie = 1;
+                    MessageBox.Show("Ребенок уже записан на этот курс");
                 }
-                AddToBD.AddLessonChild(lessonChild);
-                MessageBox.Show("Заявка успешно создана, в скором времени с вами свяжутся");
+
+                Close();
             }
             else
             {
-                MessageBox.Show("Ребенок уже записан на этот курс");
+                MessageBox.Show("Заполните все поля");
             }
             
-            Close();
 
 
         }

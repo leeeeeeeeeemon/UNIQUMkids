@@ -68,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EmpMainPage.xaml.cs">
+      <DependentUpon>EmpMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ParentAddOrRedactChildWindow.xaml.cs">
       <DependentUpon>ParentAddOrRedactChildWindow.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
     <Page Include="AutorizationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EmpMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

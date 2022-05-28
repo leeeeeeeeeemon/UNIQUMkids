@@ -64,6 +64,7 @@ namespace UNIQUMkidsWPF
                             Properties.Settings.Default.Login = null;
                             Properties.Settings.Default.Save();
                         }
+                        NavigationService.Navigate(new EmpMainPage(logTeacher.id_Teacher, (int)logTeacher.id_Role));
                     }
                     else
                     {
