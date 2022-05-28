@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UNIQUMkidsWPF"
+      xmlns:hamburgerMenu="clr-namespace:HamburgerMenu;assembly=HamburgerMenu"
       mc:Ignorable="d" 
       d:DesignHeight="625" d:DesignWidth="1050"
       Title="ParentChildPage">
@@ -22,7 +23,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView x:Name="childList" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        <ListView x:Name="childList" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" SelectionChanged="childList_SelectionChanged" FontWeight="Bold">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Фамилия"  DisplayMemberBinding="{Binding Surname}"/>
@@ -31,5 +32,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="addChild_btn" Content="Добавить ребенка" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="242"  FontSize="10" Click="addChild_btn_Click" />
+        <Button x:Name="updateList_btn" Content="Обновить" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="242"  FontSize="10"  Grid.Column="1" Click="updateList_btn_Click" />
+
+        
     </Grid>
 </Page>

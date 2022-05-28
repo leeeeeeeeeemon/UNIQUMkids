@@ -121,15 +121,6 @@ void MainMenu(int idRole, int idUser)
                 newChild.Surname = Console.ReadLine();
                 Console.WriteLine("[+] Введите возраст ребенка: ");
                 newChild.Year = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("[+] Введите пол ребенка ребенка (м/ж): ");
-                if (Console.ReadLine() == "ж")
-                {
-                    newChild.id_Gender = 2;
-                }
-                else
-                {
-                    newChild.id_Gender = 1;
-                }
                 newChild.id_Parent = idUser;
                 newChild.IsDeleted = false;
                 AddToBD.AddChild(newChild);
@@ -144,15 +135,6 @@ void MainMenu(int idRole, int idUser)
                     Console.WriteLine($"[+] Имя: {child.Name}");
                     Console.WriteLine($"[+] Фамилия: {child.Surname}");
                     Console.WriteLine($"[+] Возраст: {child.Year}");
-                    if(child.id_Gender == 1)
-                    {
-                        Console.WriteLine($"[+] Пол: Мужской");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"[+] Пол: Женский");
-                    }
-                    
                 }
                 Console.WriteLine("");
             }

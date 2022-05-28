@@ -16,6 +16,11 @@ namespace UNIQUMkidsCore
             return parent;
         }
 
+        public static void SaveChangeDB()
+        {
+            bd_connection.connection.SaveChanges();
+        }
+
         public static bool CheckRegistrationLogin(string login)
         {
             List<Parent> usr = GetDataFromDB.GetParent();
@@ -60,6 +65,18 @@ namespace UNIQUMkidsCore
             return lessons.Name;
         }
 
+        public static bool childOnLesson(int idChild, int idLesson)
+        {
+            LessonChild lesChild = GetDataFromDB.GetLessonChild().FirstOrDefault(p => p.id_Child == idChild && p.id_Lesson == idLesson);
+            if(lesChild != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public static string nameChildOnId(int id)
         {
             Child child = GetDataFromDB.GetChild().Where(p => p.id_Child == id).FirstOrDefault();

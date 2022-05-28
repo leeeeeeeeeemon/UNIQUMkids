@@ -25,8 +25,6 @@ namespace UNIQUMkidsWPF
         {
             InitializeComponent();
             idParent = idparent;
-            tb_Description.AcceptsReturn = true;
-            tb_Description.AcceptsTab = true;
             tb_Description.Text = "ЛУЧШАЯ ШКОЛА РАЗВИТИЯ В КАЗАНИ!!!!" 
                 + Environment.NewLine + "Региональный представитель ВСЕМИРНОЙ Ассоциации ПРОФЕССИОНАЛОВ в сфере МЕНТАЛЬНОЙ АРИФМЕТИКИ UAMAP"
                 + Environment.NewLine + "Обучение по всем международным стандартам. (Сертификаты SAMA и PAMA GLOBAL - Крупнейшие организации мира по ментальной арифметике)"
@@ -67,14 +65,14 @@ namespace UNIQUMkidsWPF
             NavigationService.Navigate(new ParentChildPage(idParent));
         }
 
-        private void HamburgerMenuItem_Lesson(object sender, RoutedEventArgs e)
+        private void HamburgerMenuItem_Main(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void HamburgerMenuItem_SiqnUp(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new ParentSiqnUpPage(idParent));
         }
     }
 }

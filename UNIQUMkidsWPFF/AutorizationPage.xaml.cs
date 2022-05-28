@@ -54,6 +54,16 @@ namespace UNIQUMkidsWPF
                     if(logTeacher != null)
                     {
                         //Авторизация учитель
+                        if (cb_save.IsChecked.GetValueOrDefault())
+                        {
+                            Properties.Settings.Default.Login = tb_login.Text;
+                            Properties.Settings.Default.Save();
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.Login = null;
+                            Properties.Settings.Default.Save();
+                        }
                     }
                     else
                     {
@@ -78,6 +88,16 @@ namespace UNIQUMkidsWPF
                 else
                 {
                     //Авторизация родитель
+                    if (cb_save.IsChecked.GetValueOrDefault())
+                    {
+                        Properties.Settings.Default.Login = tb_login.Text;
+                        Properties.Settings.Default.Save();
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.Login = null;
+                        Properties.Settings.Default.Save();
+                    }
                     NavigationService.Navigate(new ParentMainPage(logParent.id_Parent));
                 }
             }

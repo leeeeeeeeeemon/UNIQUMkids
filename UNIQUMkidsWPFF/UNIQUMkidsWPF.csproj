@@ -68,11 +68,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ParentAddOrRedactChildWindow.xaml.cs">
+      <DependentUpon>ParentAddOrRedactChildWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ParentChildPage.xaml.cs">
       <DependentUpon>ParentChildPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ParentConnectSiqnAndChildWindow.xaml.cs">
+      <DependentUpon>ParentConnectSiqnAndChildWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ParentMainPage.xaml.cs">
       <DependentUpon>ParentMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParentSiqnUpForLessonWindow.xaml.cs">
+      <DependentUpon>ParentSiqnUpForLessonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParentSiqnUpPage.xaml.cs">
+      <DependentUpon>ParentSiqnUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -96,11 +108,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ParentAddOrRedactChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ParentChildPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ParentConnectSiqnAndChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ParentMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParentSiqnUpForLessonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParentSiqnUpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,6 +172,12 @@
       <Project>{cf684780-c336-4a2b-9185-04583b9f5272}</Project>
       <Name>UNIQUMkidsCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\reading.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\uniqumLogo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

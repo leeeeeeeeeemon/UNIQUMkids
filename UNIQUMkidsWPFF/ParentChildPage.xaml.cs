@@ -28,5 +28,31 @@ namespace UNIQUMkidsWPF
             this.DataContext = this;
             childList.ItemsSource = GetDataFromDB.GetChild().Where(p=> p.id_Parent == parentId);
         }
+
+        private void childList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (childList.SelectedItem != null)
+            {
+                var n = childList.SelectedItem as Child;
+
+                Window window = new ParentAddOrRedactChildWindow(n);
+                window.Show();
+            }
+
+            
+        }
+
+        private void addChild_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new ParentAddOrRedactChildWindow(idParent);
+            window.Show();
+        }
+
+        private void updateList_btn_Click(object sender, RoutedEventArgs e)
+        {
+            childList.ItemsSource = GetDataFromDB.GetChild().Where(p => p.id_Parent == idParent);
+        }
+
+        
     }
 }

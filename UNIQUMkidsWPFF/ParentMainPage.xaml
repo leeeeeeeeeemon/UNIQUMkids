@@ -10,12 +10,12 @@
       Title="ParentMainPage">
 
     <Grid>
-        <TextBox x:Name="tb_Description" Background="White" Foreground="#24AAE1" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" 
-          FontSize="12" BorderBrush="White" FontWeight="Bold" Visibility="Visible">
+        <TextBlock x:Name="tb_Description" Background="White" Foreground="#24AAE1" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" 
+          FontSize="14"  FontWeight="Bold" Visibility="Visible" IsEnabled="False">
 
-        </TextBox>
+        </TextBlock>
         <hamburgerMenu:HamburgerMenu x:Name="hamburgMenu" BorderBrush="#FFFF6700" Height="120" Background="White"   MenuIconColor="#F3863B"  MenuItemForeground="#764187" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="#FFE82222">
-            <hamburgerMenu:HamburgerMenuItem Text="Информация о курсах" Background="#FFF1BF9D" SelectionIndicatorColor="White" Selected="HamburgerMenuItem_Lesson" />
+            <hamburgerMenu:HamburgerMenuItem Text="Главная" Background="#FFF1BF9D" SelectionIndicatorColor="White" Selected="HamburgerMenuItem_Main" />
             <hamburgerMenu:HamburgerMenuItem Text="Мои дети" Background="#FFFF6700" Selected="HamburgerMenuItem_Child" SelectionIndicatorColor="White"/>
             <hamburgerMenu:HamburgerMenuItem Text="Записаться на занятий" Background="#FFFF6700" Selected="HamburgerMenuItem_SiqnUp" />
         </hamburgerMenu:HamburgerMenu>
