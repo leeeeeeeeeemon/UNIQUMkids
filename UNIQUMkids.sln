@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNIQUMkidsCore", "UNIQUMkid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNIQUMkidsWPF", "UNIQUMkidsWPFF\UNIQUMkidsWPF.csproj", "{D7D0B2CE-FBE3-4F18-9DE3-DBE3B57F4F26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNIQUMKidsTestFramework", "UNIQUMKidsTestFramework\UNIQUMKidsTestFramework.csproj", "{4E4EC39B-016F-49E4-A9DF-2E0FBBB0EBAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CF684780-C336-4A2B-9185-04583B9F5272} = {CF684780-C336-4A2B-9185-04583B9F5272}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNIQUMkidsApi", "UNIQUMkidsApi\UNIQUMkidsApi.csproj", "{D76C7CFB-5E53-4B9D-A8D0-9D0AC2765450}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +34,14 @@ Global
 		{D7D0B2CE-FBE3-4F18-9DE3-DBE3B57F4F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7D0B2CE-FBE3-4F18-9DE3-DBE3B57F4F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7D0B2CE-FBE3-4F18-9DE3-DBE3B57F4F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4EC39B-016F-49E4-A9DF-2E0FBBB0EBAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4EC39B-016F-49E4-A9DF-2E0FBBB0EBAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4EC39B-016F-49E4-A9DF-2E0FBBB0EBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4EC39B-016F-49E4-A9DF-2E0FBBB0EBAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D76C7CFB-5E53-4B9D-A8D0-9D0AC2765450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D76C7CFB-5E53-4B9D-A8D0-9D0AC2765450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D76C7CFB-5E53-4B9D-A8D0-9D0AC2765450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D76C7CFB-5E53-4B9D-A8D0-9D0AC2765450}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
