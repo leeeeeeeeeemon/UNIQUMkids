@@ -71,11 +71,6 @@ namespace UNIQUMkidsWPF
             {
                 MessageBox.Show("Заполните все поля");
             }
-            
-
-
         }
     }
-
-
 }

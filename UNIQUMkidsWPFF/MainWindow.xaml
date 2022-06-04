@@ -5,20 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UNIQUMkidsWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height ="800"  Width="1050">
+        Title="MainWindow" Height ="800"  Width="1050" >
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="1003*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="175*"/>
             <RowDefinition Height="625*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Top" Height ="200" Grid.RowSpan="2"  >
+        <Grid Grid.Row="0" VerticalAlignment="Top" Height ="200" Grid.RowSpan="2" Grid.ColumnSpan="2"  >
             <Grid.Background>
                 <ImageBrush ImageSource="img\MkidsBanner.jpg"></ImageBrush>
                 <!--C:\Users\secon\source\repos\UNIQUMkids\UNIQUMkidsWPF\img\UNIQUMkidsBanner.jpg-->
             </Grid.Background>
         </Grid>
 
-        <Frame x:Name="frameNavigate" Grid.Row="1">
+        <Frame x:Name="frameNavigate" Grid.Row="1" Grid.ColumnSpan="2">
 
         </Frame>
     </Grid>

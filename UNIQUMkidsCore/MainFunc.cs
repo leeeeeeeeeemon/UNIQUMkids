@@ -51,8 +51,7 @@ namespace UNIQUMkidsCore
         }
 
         public static Teacher AuthorizationTeacher(string login, string password)
-        {
-            
+        {   
             List<Teacher> usr = GetDataFromDB.GetTeacher();
             Teacher teacher = usr.Where(a => a.Login == login && a.Password == password).FirstOrDefault();
             return teacher;

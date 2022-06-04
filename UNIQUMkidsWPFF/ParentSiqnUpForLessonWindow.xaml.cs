@@ -31,7 +31,7 @@ namespace UNIQUMkidsWPF
             lesson = GetDataFromDB.GetLesson().FirstOrDefault(p => p.id_Lesson == idLesson);
             lessonName_block.Text = lesson.Name;
             yeras_block.Text = Convert.ToString(lesson.MinYear);
-            price_block.Text = Convert.ToString(lesson.Price);
+            price_block.Text = Convert.ToString(lesson.Price) + " рублей";
             description_block.Text = lesson.Description;
         }
 

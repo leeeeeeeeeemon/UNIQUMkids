@@ -5,7 +5,7 @@ using UNIQUMkidsCore;
 namespace UNIQUMKidsTestFramework
 {
     [TestClass]
-    public class UnitTest1
+    public class ModulTests
     {
         [TestMethod]
         public void TestGettingParent()
@@ -29,6 +29,18 @@ namespace UNIQUMKidsTestFramework
             LessonChild lessonChild = GetDataFromDB.GetLessonChild().Find(x => x.id_LessonChild == 1);
             Assert.AreEqual(lessonChild.id_Lesson, 1);
             Assert.AreEqual(lessonChild.id_Child, 2);
+        }
+        [TestMethod]
+        public void TestGettingTeacher()
+        {
+            Teacher teacher = GetDataFromDB.GetTeacher().Find(x => x.id_Teacher == 1);
+            Assert.AreEqual(teacher.Name, "Элина");
+        }
+        [TestMethod]
+        public void TestGettingLesson()
+        {
+            Lesson lesson = GetDataFromDB.GetLesson().Find(x => x.id_Lesson == 1);
+            Assert.AreEqual(lesson.Name, "Ментальная арифметика");
         }
     }
 }

@@ -39,6 +39,18 @@ namespace UNIQUMkidsApi.Controllers
                 return new Parent();
             }
         }
+        [HttpGet("child/{id_Parent}")]
+        public Child GetChilds(int id)
+        {
+            try
+            {
+                return GetDataFromDB.GetChild().Find(x => x.id_Parent == id);
+            }
+            catch (Exception ex)
+            {
+                return new Child();
+            }
+        }
 
     }
 }

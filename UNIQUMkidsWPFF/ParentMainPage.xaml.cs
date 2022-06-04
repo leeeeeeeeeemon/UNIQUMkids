@@ -54,12 +54,6 @@ namespace UNIQUMkidsWPF
                                         + Environment.NewLine + "Тел.: 89-503-203-555";
             
         }
-
-        public void press()
-        {
-
-        }
-
         private void HamburgerMenuItem_Child(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ParentChildPage(idParent));

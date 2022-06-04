@@ -30,7 +30,6 @@ namespace UNIQUMkidsWPF
             InitializeComponent();
             tb_login.Text = Properties.Settings.Default.Login;
 
-
             tb_password.IsEnabled = false;
             if (Properties.Settings.Default.Password < DateTime.Now)
             {
@@ -106,63 +105,6 @@ namespace UNIQUMkidsWPF
             {
                 MessageBox.Show("Заполните все поля");
             }
-            //logParent = MainFunc.Authorization(tb_login.Text, tb_password.Password);
-            //users = new ObservableCollection<User>(bd_connection.connection.User.ToList());
-            //var usr = users.Where(a => a.Login == tb_login.Text && a.Password == tb_password.Password).FirstOrDefault();
-            //if (usr != null)
-            //{
-            //    if (cb_save.IsChecked.GetValueOrDefault())
-            //    {
-            //        Properties.Settings.Default.Login = tb_login.Text;
-            //        Properties.Settings.Default.Save();
-            //    }
-            //    else
-            //    {
-            //        Properties.Settings.Default.Login = null;
-            //        Properties.Settings.Default.Save();
-            //    }
-            //    pass_count = 0;
-            //    //NavigationService.Navigate(new ListPage(usr));
-            //}
-            //else
-            //{
-
-
-
-            //    if (pass_count == 3)
-            //    {
-            //        pass_count = 0;
-            //        Properties.Settings.Default.Password = DateTime.Now.AddMinutes(1);
-            //        Properties.Settings.Default.Save();
-            //        tb_password.Visibility = Visibility.Hidden;
-            //    }
-            //    if (Properties.Settings.Default.Password > DateTime.Now)
-            //    {
-            //        MessageBox.Show($"Слишком много попыток ввода, вход заморожен осталось: {Properties.Settings.Default.Password - DateTime.Now}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Неверный логин или пароль", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //        pass_count++;
-            //    }
-            //}
         }
-
-        public void Authorization(int id_user, int id_role)
-        {
-            if (cb_save.IsChecked.GetValueOrDefault())
-            {
-                Properties.Settings.Default.Login = tb_login.Text;
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                Properties.Settings.Default.Login = null;
-                Properties.Settings.Default.Save();
-            }
-            pass_count = 0;
-            //NavigationService.Navigate(new ListPage(usr));
-        }
-
     }
 }

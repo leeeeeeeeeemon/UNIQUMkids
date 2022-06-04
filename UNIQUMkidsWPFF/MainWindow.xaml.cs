@@ -23,6 +23,7 @@ namespace UNIQUMkidsWPF
         public MainWindow()
         {
             InitializeComponent();
+
             frameNavigate.NavigationService.Navigate(new AutorizationPage());
         }
     }
